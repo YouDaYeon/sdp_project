@@ -77,11 +77,17 @@
       </nav>
       
       <li class="nav-item">
-                    <a class="nav-link" href="http://127.0.0.1:8000/app/user/signin" style="color: gray; display: inline-block;"><u>로그인</u></a>
-                    <!-- <a class="nav-link" href="http://127.0.0.1:8000/app/home/" style="color: gray; display: inline-block;"><u>로그아웃</u></a> -->
-                    <a class="nav-link" style="color: gray; display: inline-block; ">/</a>
-                    <a class="nav-link" href="http://127.0.0.1:8000/app/user/signup" style="color: gray; display: inline-block; "><u>회원가입</u></a>
-          </li>
+        
+        {% comment %} <a class="nav-link" href="http://127.0.0.1:8000/app/user/signin" style="color: gray; display: inline-block;"><u>로그인</u></a>
+        <!-- <a class="nav-link" href="http://127.0.0.1:8000/app/home/" style="color: gray; display: inline-block;"><u>로그아웃</u></a> -->
+        <a class="nav-link" style="color: gray; display: inline-block; ">/</a> {% endcomment %}
+        {% if request.session.is_logged_in %}
+          <a class="nav-link" href="/app/user/signout/" style="color: gray; display: inline-block;"><u>로그아웃</u></a>
+        {% else %}
+          <a class="nav-link" href="/app/user/signin/" style="color: gray; display: inline-block;"><u>로그인</u></a>
+        {% endif %}
+        <a class="nav-link" href="/app/user/signup/" style="color: gray; display: inline-block; "><u>회원가입</u></a>
+      </li>
     </div>
   </div>
 </nav>
@@ -156,5 +162,11 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        {% if message %}
+        <script>
+            alert("{{ message }}");
+        </script>
+        {% endif %}
+
     </body>
 </html>
